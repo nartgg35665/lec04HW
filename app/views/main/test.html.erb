@@ -1,0 +1,23 @@
+
+	<%= form_with url: "/main/test", method:"post",  data:{turbo:false} do |form| %>
+	<table>
+		<tr>
+			<th>subject</th>
+			<th>score</th>
+		</tr>
+		<% @number.times do |i|%>
+		<% if @subjectlist&&@scorelist %>
+			<tr>
+				<td><div><%= form.text_field "subject#{i}",value:"#{@subjectlist[i]}" %> <% if @subjectlist[i]==''%> <%= form.label "Please enter subject#{i+1}" %> <% end%></div></td>
+				<td><div><%= form.text_field "score#{i}",value:"#{@scorelist[i].to_s}" %><% if @scorelist[i]==''%> <%= form.label "Please enter score#{i+1}"%> <%end%></div></td>
+			</tr>
+			<% else %>
+				<tr>
+				<td><%= form.text_field "subject#{i}" %> </td>
+				<td><%= form.text_field "score#{i}" %></td>
+			</tr>
+			<%end%>
+		<% end %>
+	</table>
+	<%= form.submit "submit"%>
+	<% end %>
